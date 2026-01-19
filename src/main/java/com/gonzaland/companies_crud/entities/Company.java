@@ -1,5 +1,6 @@
 package com.gonzaland.companies_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class Company {
     @Column(length = 255)
     private String logo;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "foundation_date")
     private LocalDate foundationDate;
 

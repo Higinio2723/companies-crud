@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "company")
@@ -31,4 +32,8 @@ public class Company {
     @Column(name = "foundation_date")
     private LocalDate foundationDate;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = {CascadeType.MERGE, CascadeType.PERSIST,
+    CascadeType.REMOVE}, orphanRemoval = true)
+    @JoinColumn(name="id_company", referencedColumnName = "id")
+    private List<WebSite> webSites;
 }

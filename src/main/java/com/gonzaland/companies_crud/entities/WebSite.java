@@ -19,11 +19,6 @@ public class WebSite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_company", referencedColumnName = "id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Company company;
-
     @Column(name = "name", length = 32, nullable = false, unique = true)
     private String name;
 

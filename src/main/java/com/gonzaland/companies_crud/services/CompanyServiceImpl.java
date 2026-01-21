@@ -50,11 +50,20 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company update(Company company, String name) {
-        return null;
+        Company companyToUpdate = companyRepository.findByName(name)
+                .orElseThrow(()-> new RuntimeException("Company not found"));
+        companyToUpdate.builder()
+                .logo(company.getLogo())
+                .foundationDate(company.getFoundationDate())
+                .founder(company.getFounder());
+        return companyRepository.save(companyToUpdate);
     }
 
     @Override
     public void delete(String name) {
+        Company companyToDelete = companyRepository.findByName(name)
+                .orElseThrow(()-> new RuntimeException("Company not found"));
 
+        companyRepository.delete(companyToDelete);
     }
 }

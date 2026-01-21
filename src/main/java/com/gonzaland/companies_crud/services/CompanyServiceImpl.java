@@ -59,6 +59,10 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.save(companyToUpdate);
     }
 
+    /**
+     *
+     * @param name
+     */
     @Override
     public void delete(String name) {
         Company companyToDelete = companyRepository.findByName(name)

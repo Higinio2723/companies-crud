@@ -60,7 +60,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     /**
-     *
+     * Delete a company by its name
      * @param name
      */
     @Override

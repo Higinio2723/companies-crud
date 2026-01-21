@@ -19,12 +19,17 @@ public class WebSite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_company", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Company company;
+
     @Column(name = "name", length = 32, nullable = false, unique = true)
     private String name;
 
-    @Column(columnDefinition = "category")
-    @Enumerated(value = EnumType.STRING)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category", length = 32, nullable = false)
+    private Category category;
 
     @Column(columnDefinition = "text")
     private String description;

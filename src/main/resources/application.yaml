@@ -16,3 +16,9 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+server:
+  context-path: /companies-crud
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/index.html

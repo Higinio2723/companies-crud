@@ -52,10 +52,11 @@ public class CompanyServiceImpl implements CompanyService {
     public Company update(Company company, String name) {
         Company companyToUpdate = companyRepository.findByName(name)
                 .orElseThrow(()-> new RuntimeException("Company not found"));
-        companyToUpdate.builder()
-                .logo(company.getLogo())
-                .foundationDate(company.getFoundationDate())
-                .founder(company.getFounder());
+
+        companyToUpdate.setLogo(company.getLogo());
+        companyToUpdate.setFoundationDate(company.getFoundationDate());
+        companyToUpdate.setFounder(company.getFounder());
+
         return companyRepository.save(companyToUpdate);
     }
 

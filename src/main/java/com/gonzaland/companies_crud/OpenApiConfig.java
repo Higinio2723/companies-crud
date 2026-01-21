@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "Companies CRUD API",
                 version = "1.0.0",
-                description = "This is a CRUD API for management companies."
+                description = "This is a CRUD API for managing companies."
         )
 )
 public class OpenApiConfig {

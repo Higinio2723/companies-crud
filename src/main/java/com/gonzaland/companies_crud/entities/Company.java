@@ -32,7 +32,8 @@ public class Company {
     @Column(name = "foundation_date")
     private LocalDate foundationDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = {CascadeType.MERGE, CascadeType.PERSIST,
+    @OneToMany(fetch = FetchType.LAZY,  cascade = {CascadeType.MERGE, CascadeType.PERSIST,
     CascadeType.REMOVE}, orphanRemoval = true)
+    @JoinColumn(name="id_company",referencedColumnName = "id")
     private List<WebSite> webSites;
 }

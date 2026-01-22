@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.io.ObjectStreamClass;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company create(Company company) {
         company.getWebSites().forEach(webSite -> {
-                    if (Objects.isNull(webSite.getCompany())) {
+                    if (Objects.isNull(webSite.getCategory())) {
                         webSite.setCategory(Category.NONE);
                     }
                 }
@@ -71,4 +72,11 @@ public class CompanyServiceImpl implements CompanyService {
 
         companyRepository.delete(companyToDelete);
     }
+
+    @Override
+    public List<Company> readAll() {
+        return companyRepository.findAll();
+    }
+
+
 }

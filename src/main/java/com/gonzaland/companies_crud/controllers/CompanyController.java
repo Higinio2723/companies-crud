@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = "/api/company")
@@ -21,10 +23,18 @@ public class CompanyController {
 
     @Operation(summary = "get a company given a company name")
     @GetMapping(path = "{name}")
-    public ResponseEntity<Company> getCompanyByName(String name) {
+    public ResponseEntity<Company> getCompanyByName(@PathVariable String name) {
         log.info("GET: company: {}", name);
         Company company = this.companyService.readByName(name);
         return ResponseEntity.ok(company);
+    }
+
+    @Operation(summary = "get all company given a company name")
+    @GetMapping
+    public ResponseEntity<List<Company>> getCompanyAll() {
+        List<Company> companies = this.companyService.readAll();
+        log.info("GET: companies: {}", companies);
+        return ResponseEntity.ok(companies);
     }
 
     @Operation(summary = "save in DB a company given a company from body")

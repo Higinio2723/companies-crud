@@ -18,6 +18,7 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 server:
   context-path: /companies-crud
+  port: 8082
 
 springdoc:
   swagger-ui:

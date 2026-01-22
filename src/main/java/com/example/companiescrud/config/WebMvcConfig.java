@@ -5,6 +5,5 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    // Eliminados los resource handlers para permitir que Spring Boot y springdoc
-    // gestionen /swagger-ui/** y /webjars/** automáticamente.
+    // Sin resource handlers personalizados para permitir /swagger-ui/** y /webjars/** por defecto.
 }

@@ -18,8 +18,14 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 server:
   context-path: /companies-crud
-  port: 8082
+  port: 0
 
 springdoc:
   swagger-ui:
     path: /swagger-ui/index.html
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.value}}
+client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

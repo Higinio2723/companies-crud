@@ -1,20 +1,36 @@
 spring:
+  datasource:
+    # Evita placeholders circulares (antes: ${spring.datasource.url}).
+    # Puedes sobreescribir con variables de entorno.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/companies}
+    username: ${DB_USERNAME:debuggeandoideas}
+    password: ${DB_PASSWORD:udemy}
+    hikari:
+      connection-timeout: ${DB_CONNECTION_TIMEOUT:30000}
+      maximum-pool-size: ${DB_MAX_POOL_SIZE:10}
   application:
     name: companies-crud
+  profiles:
+    active: default
+  config:
+    import: optional:configserver:http://localhost:7777
 logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 server:
-  context-path: /companies-crud
-  port: 0
+  servlet:
+    context-path: /companies-crud
+  port: 8081
 
 springdoc:
   swagger-ui:
+    # Ruta típica en springdoc 2.x; con context-path quedará en /companies-crud/swagger-ui/index.html
     path: /swagger-ui/index.html
+
 eureka:
   instance:
-    instance-id: ${spring.application.name}:${random.value}}
+    instance-id: ${spring.application.name}:${random.value}
 client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+  service-url:
+    defaultZone: http://localhost:8761/eureka/

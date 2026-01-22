@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "/api/company")
+@RequestMapping(path = "company")
 @Slf4j
 @Tag(name = "Companies resource")
 public class CompanyController {

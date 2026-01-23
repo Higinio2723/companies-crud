@@ -39,7 +39,7 @@ public class CompanyController {
 
     @Operation(summary = "save in DB a company given a company from body")
     @PostMapping
-    public ResponseEntity<Company> post(Company company) {
+    public ResponseEntity<Company> post(@RequestBody Company company) {
         log.info("POST: company: {}", company.getName());
         Company createdCompany = this.companyService.create(company);
         return ResponseEntity.ok(createdCompany);

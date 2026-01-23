@@ -28,13 +28,13 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company create(Company company) {
+        log.info("###################### Creating company: {}", company.getName());
         company.getWebSites().forEach(webSite -> {
                     if (Objects.isNull(webSite.getCategory())) {
                         webSite.setCategory(Category.NONE);
                     }
                 }
         );
-
    return companyRepository.save(company);
 
     }

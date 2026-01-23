@@ -2,7 +2,7 @@ spring:
   datasource:
     # Evita placeholders circulares (antes: ${spring.datasource.url}).
     # Puedes sobreescribir con variables de entorno.
-    url: ${db.url:jdbc:postgresql://localhost:5432/companies}
+    url: ${db.url:jdbc:postgresql://localhost:5434/companies}
     username: ${db.username:debuggeandoideas}
     password: ${db.password:udemy}
     hikari:
@@ -21,7 +21,7 @@ logging:
 server:
   servlet:
     context-path: /companies-crud
-  port: 8081
+  port: 0
 
 springdoc:
   swagger-ui:

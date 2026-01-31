@@ -3,6 +3,8 @@ package com.gonzaland.companies_crud.services;
 import com.gonzaland.companies_crud.entities.Category;
 import com.gonzaland.companies_crud.entities.Company;
 import com.gonzaland.companies_crud.repositories.CompanyRepository;
+
+import io.micrometer.tracing.Tracer;
 import io.swagger.v3.oas.annotations.servers.Server;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     CompanyRepository companyRepository;
 
+    private final Tracer tracer;
+
+
     @Override
     public Company create(Company company) {
         log.info("###################### Creating company: {}", company.getName());
@@ -42,6 +47,13 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company readByName(String name) {
+        var spam = tracer.nextSpan().name("read-company-by-name");
+        try{Tracer.SpanInScope spanInScope = tracer.withSpan(spam.start());
+            log.info("###################### Reading company by name: {}", name);
+
+        } finally {
+            spam.end();
+        }
 
         return companyRepository.findByName(name)
                 .orElseThrow(()-> new RuntimeException("Company not found"));

@@ -2,6 +2,8 @@ package com.gonzaland.companies_crud.controllers;
 
 import com.gonzaland.companies_crud.entities.Company;
 import com.gonzaland.companies_crud.services.CompanyService;
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.observation.annotation.Observed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -23,13 +25,15 @@ public class CompanyController {
 
     @Operation(summary = "get a company given a company name")
     @GetMapping(path = "{name}")
+    @Observed(name="company.name")
+    @Timed(value = "company.name")
     public ResponseEntity<Company> getCompanyByName(@PathVariable String name) {
         log.info("GET: company: {}", name);
-        try{
-            Thread.sleep(5000);
-        } catch (InterruptedException e){
-            Thread.currentThread().interrupt();
-        }
+//        try{
+//            Thread.sleep(7000);
+//        } catch (InterruptedException e){
+//            Thread.currentThread().interrupt();
+//        }
         Company company = this.companyService.readByName(name);
         return ResponseEntity.ok(company);
     }
@@ -44,6 +48,8 @@ public class CompanyController {
 
     @Operation(summary = "save in DB a company given a company from body")
     @PostMapping
+    @Observed(name="company.save")
+    @Timed(value = "company.save")
     public ResponseEntity<Company> post(@RequestBody Company company) {
         log.info("POST: company: {}", company.getName());
         Company createdCompany = this.companyService.create(company);
